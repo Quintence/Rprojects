@@ -1,0 +1,93 @@
+#imports packages
+library(datarium)
+attach(marketing)
+library(ggplot2)
+ggplot(marketing) + aes(youtube , sales) + geom_point()
+
+cor(marketing$youtube, marketing$sales)
+
+library(ggplot2)
+ggplot(marketing) + aes(youtube , sales)  + geom_point() 
+
+reg <- lm(sales ~ youtube, data = marketing)
+coeff=coefficients(reg)
+eq = paste0("y = ", coeff[2],1, "*x ", coeff[1],1)
+
+plot(sales, main=eq)
+abline(reg, col="blue")
+
+linear_model <- lm(sales ~ youtube, data = marketing)
+linear_model
+x <- 69
+predicted_amount = 0.04754 * x + 8.43911
+
+linear_model2 <- lm(sales ~ youtube + facebook, data = marketing)
+linear_model2
+
+a <- 69
+b <- 39.36
+prediction1 = 0.04575 * a + 0.18799*b + 3.50532
+summary(linear_model2)
+
+linear_model2 <- lm(sales ~ youtube + facebook, data = marketing)
+linear_model2
+
+a <- 69
+b <- 39.36
+prediction1 = 0.04575 * a + 0.18799*b + 3.50532
+prediction1
+
+data("marketing")
+cor(marketing)
+
+#install.packages("ISwR")
+library(ISwR) 
+data(airquality)
+str(airquality)
+
+attach(airquality)
+hist(airquality$Ozone)
+
+boxplot(Ozone ~as.factor(Month),col=c("green",rep("red",3),"Orange"),xlab="Ozone", ylab="Month")
+
+#Q3
+area.circle <- 2^2
+simulations<- 100000 
+perimeter <-1
+pintInCircle <- function(perimeter=1){
+  x<-runif(n=1, min = -perimeter, max = perimeter)
+  y <- runif(n=1, min= -perimeter, max = perimeter)
+  return(list(x=x,
+              y=y,
+              inCircle = x^2 + y^2 <= perimeter^2))
+
+  
+}
+simulation = function(long){
+  c = rep(0,long)
+  numberIn = 0
+  for(i in 1:long){
+    x = runif(2,-1,1)
+    if(sqrt(x[1]*x[1] + x[2]*x[2]) < 1){
+      numberIn = numberIn + 1
+    }
+  }
+      return(numberIn)
+      
+    
+}
+size = 10000
+res=simulation(size)
+simulation.pi <- function(iterations = 1000000) {
+    
+    x.pos <- runif(iterations, min=-1, max=1)
+    y.pos <- runif(iterations, min=-1, max=1)
+    
+    draw.pos <- ifelse(x.pos^2 + y.pos^2 <= 1, TRUE, FALSE)
+    draws.in <- length(which(draw.pos == TRUE))
+    
+    return(4*(draws.in/iterations))
+    
+    
+}
+simulation.pi()
